@@ -1,4 +1,5 @@
 .env
+datos.env
 # Logs
 logs
 *.log
