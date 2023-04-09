@@ -1,73 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const formulario = document.getElementById("formulario-busqueda");
-    formulario.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const inputBusqueda = document.getElementById("input-busqueda");
-      const terminoBusqueda = inputBusqueda.value.trim();
-      if (terminoBusqueda) {
-        fetch(`http://localhost:3000/api/peliculas/buscar/${terminoBusqueda}`)
-          .then((response) => response.json())
-          .then((data) => {
-            mostrarResultadoBusqueda(data);
-          })
-          .catch((error) => {
-            console.error("Error al obtener los datos:", error);
-          });
-      }
-    });
-  
-    // Carga inicial de datos
-    fetch("http://localhost:3000/api/peliculas")
-      .then((response) => response.json())
-      .then((data) => {
-        mostrarPeliculas(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los datos:", error);
-      });
-  });
-  
-  function mostrarPeliculas(data) {
-    const container = document.getElementById("peliculas");
-    container.innerHTML = ""; // Limpiar el contenedor antes de mostrar nuevos resultados
-  
-    data.forEach((pelicula) => {
-      const div = document.createElement("div");
-      div.classList.add("datos-item");
-  
-      div.innerHTML = `
-        <h2>${pelicula.titulo}</h2>
-      `;
-  
-      container.appendChild(div);
-    });
-  }
-  
-  function mostrarResultadoBusqueda(data) {
-    const container = document.getElementById("resultado-busqueda");
-    container.innerHTML = ""; // Limpiar el contenedor antes de mostrar nuevos resultados
-  
-    if (data.length === 0) {
-      container.innerHTML = "<p>No se encontraron resultados.</p>";
-      return;
+  const formulario = document.getElementById("formulario-busqueda");
+  formulario.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const inputBusqueda = document.getElementById("input-busqueda");
+    const terminoBusqueda = inputBusqueda.value.trim();
+    if (terminoBusqueda) {
+      fetch(`http://18.221.26.134/api/peliculas/buscar/${terminoBusqueda}`)
+        .then((response) => response.json())
+        .then((data) => {
+          mostrarResultadoBusqueda(data);
+        })
+        .catch((error) => {
+          console.error("Error al obtener los datos:", error);
+        });
     }
-  
-    data.forEach((pelicula) => {
-      const div = document.createElement("div");
-      div.classList.add("datos-item");
-  
-      div.innerHTML = `
-        <h2>${pelicula.titulo} (${pelicula.ano})</h2>
-        <div class="resultado-info">
-          <p>Género: ${pelicula.genero}</p>
-          <p>Director: ${pelicula.director}</p>
-        </div>
-      `;
-  
-      container.appendChild(div);
+  });
+
+  // Carga inicial de datos
+  fetch("http://18.221.26.134/api/peliculas")
+    .then((response) => response.json())
+    .then((data) => {
+      mostrarPeliculas(data);
+    })
+    .catch((error) => {
+      console.error("Error al obtener los datos:", error);
     });
-  
-    // Ocultar la lista de películas
-    document.getElementById("peliculas").style.display = "none";
-  }
-  
+});
