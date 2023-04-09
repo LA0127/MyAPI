@@ -26,3 +26,48 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error al obtener los datos:", error);
     });
 });
+
+  
+function mostrarPeliculas(data) {
+  const container = document.getElementById("peliculas");
+  container.innerHTML = ""; // Limpiar el contenedor antes de mostrar nuevos resultados
+
+  data.forEach((pelicula) => {
+    const div = document.createElement("div");
+    div.classList.add("datos-item");
+
+    div.innerHTML = `
+      <h2>${pelicula.titulo}</h2>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+function mostrarResultadoBusqueda(data) {
+  const container = document.getElementById("resultado-busqueda");
+  container.innerHTML = ""; // Limpiar el contenedor antes de mostrar nuevos resultados
+
+  if (data.length === 0) {
+    container.innerHTML = "<p>No se encontraron resultados.</p>";
+    return;
+  }
+
+  data.forEach((pelicula) => {
+    const div = document.createElement("div");
+    div.classList.add("datos-item");
+
+    div.innerHTML = `
+      <h2>${pelicula.titulo} (${pelicula.ano})</h2>
+      <div class="resultado-info">
+        <p>Género: ${pelicula.genero}</p>
+        <p>Director: ${pelicula.director}</p>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+
+  // Ocultar la lista de películas
+  document.getElementById("peliculas").style.display = "none";
+}
