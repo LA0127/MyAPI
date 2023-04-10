@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputBusqueda = document.getElementById("input-busqueda");
     const terminoBusqueda = inputBusqueda.value.trim();
     if (terminoBusqueda) {
-      fetch(`http://18.221.26.134:3000/api/peliculas/buscar/${terminoBusqueda}`)
+      fetch(`http://3.144.175.207:3000/api/peliculas/buscar/${terminoBusqueda}`)
         .then((response) => response.json())
         .then((data) => {
           mostrarResultadoBusqueda(data);
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Carga inicial de datos
-  fetch("http://18.221.26.134:3000/api/peliculas")
+  fetch("http://3.144.175.207:3000/api/peliculas")
     .then((response) => response.json())
     .then((data) => {
       mostrarPeliculas(data);
